@@ -1,0 +1,6 @@
+{
+  "name": "Vistar City",
+  "description": "Premium real-estate land and plot purchasing platform in Bihar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
