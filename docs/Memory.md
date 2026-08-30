@@ -152,6 +152,10 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 
 ## 9. Session log
 
+### 2026-08-30 — Git push + README
+
+- Rewrote `README.md` (live host, routes, preloader/OG, Docker VPS). Pushed `main` `cbf7cbd` → `EDUNEX-OFFICIAL/Vistaar-City-Website`.
+
 ### 2026-08-30 — Open Graph + SEO
 
 - Added `public/og-image.png` (1200×630, brand logo on forest). Wired `openGraph`/`twitter` images in `site-metadata.ts`; JSON-LD `logo` + `image`. Build ARG `NEXT_PUBLIC_SITE_URL` for absolute OG URLs.
