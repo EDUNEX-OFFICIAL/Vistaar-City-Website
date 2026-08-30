@@ -1,0 +1,46 @@
+# Vistar City — Docker prod (compose project: vistar-city)
+# Usage: docker compose up -d --build
+# Loopback smoke: http://127.0.0.1:3012 — Caddy uses vistar-city-web:3000 on vps_edge
+
+name: vistar-city
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://vistaarcity.edunexservices.in}
+    image: vistar-city-web:${GIT_COMMIT:-latest}
+    container_name: vistar-city-web
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+    ports:
+      - "127.0.0.1:3012:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 45s
+    networks:
+      - vistar_city_internal
+      - vps_edge
+
+networks:
+  vistar_city_internal:
+    name: vistar_city_internal
+    driver: bridge
+  vps_edge:
+    external: true

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { footerLinks } from "@/lib/nav-links";
+import { routes } from "@/lib/routes";
 
 export default function Footer() {
   return (
@@ -13,7 +14,7 @@ export default function Footer() {
             <Link href="/" className="inline-block">
               <Image
                 src="/vistaar-logo.png"
-                alt="Vistaar Dream Home Maker"
+                alt="Vistar City"
                 width={140}
                 height={140}
                 className="h-12 md:h-16 w-auto object-contain"
@@ -45,7 +46,7 @@ export default function Footer() {
             <ul className="space-y-2 lg:space-y-2.5">
               {["Patna", "Patna Region", "Muzaffarpur", "Raxaul", "Upcoming Locations"].map((loc) => (
                 <li key={loc}>
-                  <Link href="/#locations" className="text-sand-200 hover:text-ivory transition-colors text-xs sm:text-sm">
+                  <Link href={routes.locations} className="text-sand-200 hover:text-ivory transition-colors text-xs sm:text-sm">
                     {loc}
                   </Link>
                 </li>
@@ -105,9 +106,12 @@ export default function Footer() {
               </a>
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-              <Link href="#" className="hover:text-ivory transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-ivory transition-colors">Terms & Conditions</Link>
-              <Link href="#" className="hover:text-ivory transition-colors">Partner Terms</Link>
+              <Link href={routes.contact} className="hover:text-ivory transition-colors">
+                Contact
+              </Link>
+              <Link href={routes.partner} className="hover:text-ivory transition-colors">
+                Partner Programme
+              </Link>
             </div>
           </div>
         </div>

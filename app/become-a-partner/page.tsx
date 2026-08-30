@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
+import PageShell from "@/components/layout/PageShell";
 import BecomePartnerContent from "@/components/BecomePartnerContent";
+import { pageMetadata } from "@/lib/site-metadata";
 
-export const metadata: Metadata = {
-  title: "Become a Partner | Vistar City",
+export const metadata: Metadata = pageMetadata({
+  title: "Become a Partner",
   description:
-    "Partner with Vistar City. Explore our expansion across Bihar, understand the plot buying journey, and apply to join our partner program.",
-};
+    "Partner with Vistar City across Bihar. Learn about our plotted development network and apply to join the partner program.",
+  path: "/become-a-partner",
+});
 
 export default function BecomePartnerPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-ivory">
-      <main className="flex-grow pt-16 sm:pt-20 overflow-x-hidden">
-        <BecomePartnerContent />
-      </main>
-      <Footer />
-    </div>
+    <PageShell>
+      <BecomePartnerContent />
+    </PageShell>
   );
 }

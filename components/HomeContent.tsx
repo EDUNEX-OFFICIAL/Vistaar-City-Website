@@ -1,15 +1,13 @@
-"use client";
-
-import HeroSection from "./HeroSection";
-import ProjectsSection from "./ProjectsSection";
-import ContactSection from "./ContactSection";
+import HomeExploreSection from "@/components/home/HomeExploreSection";
+import HomeHeroSection from "@/components/home/HomeHeroSection";
+import NextStepCta from "@/components/sections/NextStepCta";
 
 export default function HomeContent() {
   return (
     <>
-      <HeroSection />
-      <ProjectsSection />
-      <ContactSection />
+      <HomeHeroSection />
+      <HomeExploreSection />
+      <NextStepCta />
     </>
   );
 }

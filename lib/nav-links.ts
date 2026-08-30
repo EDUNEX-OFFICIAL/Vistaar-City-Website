@@ -1,19 +1,22 @@
+import { routes } from "./routes";
+
 export const mainNavLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/#about-us" },
-  { label: "Plots", href: "/plots" },
-  { label: "Projects", href: "/#projects" },
-  { label: "Locations", href: "/#locations" },
+  { label: "Home", href: routes.home },
+  { label: "About", href: routes.about },
+  { label: "Projects", href: routes.projects },
+  { label: "Locations", href: routes.locations },
+  { label: "Enquire", href: routes.contact },
 ] as const;
 
 export const partnerNavLink = {
   label: "Become a Partner",
-  href: "/become-a-partner",
+  href: routes.partner,
 } as const;
 
 export const navLinks = [...mainNavLinks, partnerNavLink] as const;
 
 export const footerLinks = [
-  ...navLinks,
-  { label: "Contact", href: "/#contact" },
+  ...mainNavLinks,
+  { label: "Site Visit", href: routes.siteVisit },
+  partnerNavLink,
 ] as const;

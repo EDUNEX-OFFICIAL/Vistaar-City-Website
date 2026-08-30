@@ -10,7 +10,7 @@ export default function PlotsPreviewSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
             <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-3 sm:mb-4 block">Plot Inventory</span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-forest-900 mb-4 sm:mb-6 leading-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-forest-900 mb-4 sm:mb-6 leading-tight">
               Plots In Every Location
             </h2>
             <p className="text-base sm:text-lg text-charcoal/80 mb-6 sm:mb-8 leading-relaxed font-light">
@@ -18,7 +18,7 @@ export default function PlotsPreviewSection() {
             </p>
             <Link
               href="/plots"
-              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-forest-900 text-white px-8 py-3.5 rounded-sm text-sm uppercase tracking-wider font-bold hover:bg-forest-800 transition-colors shadow-sm"
+              className="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-forest-900 text-ivory px-8 py-3.5 rounded-sm text-sm uppercase tracking-wider font-bold hover:bg-forest-800 transition-colors shadow-sm"
             >
               Browse All Plots
               <ArrowRight className="h-4 w-4" />
@@ -30,7 +30,7 @@ export default function PlotsPreviewSection() {
               <Link
                 key={city}
                 href="/plots"
-                className="bg-white rounded-sm border border-gray-100 p-5 hover:shadow-lg hover:border-forest-900/30 transition-all group flex flex-col justify-between min-h-[120px]"
+                className="bg-ivory rounded-sm border border-gray-100 p-5 hover:shadow-lg hover:border-forest-900/30 transition-all group flex flex-col justify-between min-h-[120px]"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <MapPin className="h-4 w-4 text-forest-800" />

@@ -13,6 +13,7 @@ import {
   plotsByCity,
 } from "@/lib/all-plots";
 import FullPlotDetailModal from "@/components/plots/FullPlotDetailModal";
+import { plotStatusStyles } from "@/lib/modal-styles";
 
 const cities: PlotCity[] = ["Patna", "Muzaffarpur", "Raxaul"];
 const PAGE_SIZE = 24;
@@ -55,27 +56,27 @@ export default function PlotsPageContent() {
 
   return (
     <>
-      <section className="pt-10 pb-8 md:pt-12 md:pb-10 bg-forest-900 text-white">
+      <section className="pt-10 pb-8 md:pt-12 md:pb-10 bg-forest-900 text-ivory">
         <div className="container mx-auto px-4 md:px-8 max-w-7xl text-center">
-          <span className="text-[10px] uppercase text-white/50 font-bold tracking-widest mb-3 sm:mb-4 block">Inventory</span>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">All Plots</h1>
-          <p className="text-white/80 text-base sm:text-lg font-light max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
+          <span className="text-[10px] uppercase text-ivory/50 font-bold tracking-widest mb-3 sm:mb-4 block">Inventory</span>
+          <h1 className="mb-3 font-serif text-3xl font-semibold text-ivory sm:mb-4 sm:text-4xl md:text-5xl">All Plots</h1>
+          <p className="text-ivory/80 text-base sm:text-lg font-light max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
             Browse plots in each location — Patna, Muzaffarpur & Raxaul. Click any plot for full details, map & sales contact.
           </p>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-sm">
-            <div className="bg-white/10 rounded-sm px-4 sm:px-5 py-2.5 sm:py-3 border border-white/20 min-w-[120px]">
+            <div className="bg-ivory/10 rounded-sm px-4 sm:px-5 py-2.5 sm:py-3 border border-ivory/20 min-w-[120px]">
               <div className="text-xl sm:text-2xl font-bold">{allPlots.length}</div>
-              <div className="text-white/60 text-xs uppercase tracking-wider">Total Plots</div>
+              <div className="text-ivory/60 text-xs uppercase tracking-wider">Total Plots</div>
             </div>
-            <div className="bg-white/10 rounded-sm px-4 sm:px-5 py-2.5 sm:py-3 border border-white/20 min-w-[120px]">
+            <div className="bg-ivory/10 rounded-sm px-4 sm:px-5 py-2.5 sm:py-3 border border-ivory/20 min-w-[120px]">
               <div className="text-xl sm:text-2xl font-bold">3</div>
-              <div className="text-white/60 text-xs uppercase tracking-wider">Locations</div>
+              <div className="text-ivory/60 text-xs uppercase tracking-wider">Locations</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-8 md:py-12 bg-white border-b border-gray-100">
+      <section className="py-8 md:py-12 bg-ivory border-b border-gray-100">
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <div className="flex flex-wrap gap-2 mb-5 sm:mb-6">
             {cities.map((city) => (
@@ -84,7 +85,7 @@ export default function PlotsPageContent() {
                 onClick={() => handleCityChange(city)}
                 className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-sm text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all ${
                   activeCity === city
-                    ? "bg-forest-900 text-white shadow-md"
+                    ? "bg-forest-900 text-ivory shadow-md"
                     : "bg-sand-100 text-charcoal hover:bg-sand-200"
                 }`}
               >
@@ -97,8 +98,8 @@ export default function PlotsPageContent() {
             {[
               { label: "Total", value: stats.total, color: "text-charcoal" },
               { label: "Available", value: stats.available, color: "text-forest-800" },
-              { label: "Reserved", value: stats.reserved, color: "text-yellow-700" },
-              { label: "Sold", value: stats.sold, color: "text-red-600" },
+              { label: "Reserved", value: stats.reserved, color: "text-gold-deep" },
+              { label: "Sold", value: stats.sold, color: "text-error" },
             ].map((s) => (
               <div key={s.label} className="rounded-sm border border-gray-100 bg-ivory p-3 sm:p-4 text-center">
                 <div className={`text-xl sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
@@ -145,12 +146,12 @@ export default function PlotsPageContent() {
               <button
                 key={plot.id}
                 onClick={() => setSelectedPlot(plot)}
-                className={`text-left rounded-sm border p-2.5 sm:p-3 transition-all hover:shadow-md hover:-translate-y-0.5 touch-manipulation ${
+                className={`text-left rounded-sm border p-2.5 sm:p-3 transition-shadow hover:shadow-md touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 ${
                   plot.status === "Available"
-                    ? "border-forest-200 bg-forest-50/50 hover:border-forest-900"
+                    ? "border-forest-800/20 bg-forest-900/5 hover:border-forest-800"
                     : plot.status === "Reserved"
-                      ? "border-yellow-200 bg-yellow-50/50"
-                      : "border-red-200 bg-red-50/40 opacity-80"
+                      ? "border-gold-deep/30 bg-gold/10"
+                      : "border-error/30 bg-error/5 opacity-90"
                 }`}
               >
                 <div className="text-xs font-bold text-forest-900 mb-0.5">{plot.plotNumber}</div>
@@ -158,13 +159,7 @@ export default function PlotsPageContent() {
                 <div className="text-[10px] font-medium text-charcoal mb-1">{plot.size}</div>
                 <div className="text-[10px] font-bold text-forest-900 mb-2">₹ {plot.price}</div>
                 <span
-                  className={`inline-block rounded-sm px-1.5 py-0.5 text-[9px] font-bold uppercase ${
-                    plot.status === "Available"
-                      ? "bg-forest-600 text-white"
-                      : plot.status === "Reserved"
-                        ? "bg-yellow-600 text-white"
-                        : "bg-red-600 text-white"
-                  }`}
+                  className={`inline-block rounded-sm px-1.5 py-0.5 text-[9px] font-bold uppercase ${plotStatusStyles[plot.status]}`}
                 >
                   {plot.status}
                 </span>
@@ -200,7 +195,7 @@ export default function PlotsPageContent() {
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-4 block">Sales & Support</span>
-            <h2 className="font-serif text-3xl font-bold text-forest-900 mb-4">Who Will Help You Buy?</h2>
+            <h2 className="font-serif text-3xl font-semibold text-forest-900 mb-4">Who Will Help You Buy?</h2>
             <p className="text-charcoal/70 text-sm">
               All plots are sold exclusively through Vistar City authorised sales desks. Each location has a dedicated relationship manager to guide you from enquiry to documentation.
             </p>
@@ -208,7 +203,7 @@ export default function PlotsPageContent() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {cityConfigs.map((config) => (
-              <div key={config.city} className="bg-white rounded-sm border border-gray-100 p-6 shadow-sm">
+              <div key={config.city} className="bg-ivory rounded-sm border border-gray-100 p-6 shadow-sm">
                 <div className="flex items-center gap-2 mb-4">
                   <MapPin className="h-4 w-4 text-forest-800" />
                   <h3 className="font-bold text-forest-900">{config.city}</h3>
@@ -231,42 +226,42 @@ export default function PlotsPageContent() {
             ))}
           </div>
 
-          <div className="bg-forest-900 text-white rounded-sm p-5 sm:p-8 md:p-10">
+          <div className="bg-forest-900 text-ivory rounded-sm p-5 sm:p-8 md:p-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               <div>
-                <Building2 className="h-8 w-8 mb-4 text-white/70" />
-                <h3 className="font-serif text-2xl font-bold mb-2">{headOfficeContact.name}</h3>
-                <p className="text-white/70 text-sm mb-4">{headOfficeContact.role}</p>
-                <p className="flex items-start gap-2 text-sm text-white/80 mb-2">
+                <Building2 className="h-8 w-8 mb-4 text-ivory/70" />
+                <h3 className="font-serif text-2xl font-semibold mb-2">{headOfficeContact.name}</h3>
+                <p className="text-ivory/70 text-sm mb-4">{headOfficeContact.role}</p>
+                <p className="flex items-start gap-2 text-sm text-ivory/80 mb-2">
                   <MapPin className="h-4 w-4 shrink-0 mt-0.5" /> {headOfficeContact.address}
                 </p>
-                <p className="flex items-center gap-2 text-sm text-white/80">
+                <p className="flex items-center gap-2 text-sm text-ivory/80">
                   <Clock className="h-4 w-4" /> {headOfficeContact.hours}
                 </p>
               </div>
               <div className="space-y-3">
-                <a href={`tel:${headOfficeContact.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 bg-white/10 rounded-sm px-4 py-3 hover:bg-white/20 transition-colors">
+                <a href={`tel:${headOfficeContact.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 bg-ivory/10 rounded-sm px-4 py-3 hover:bg-ivory/20 transition-colors">
                   <Phone className="h-5 w-5" />
                   <div>
-                    <div className="text-xs text-white/60">Call</div>
+                    <div className="text-xs text-ivory/60">Call</div>
                     <div className="font-bold">{headOfficeContact.phone}</div>
                   </div>
                 </a>
-                <a href={`mailto:${headOfficeContact.email}`} className="flex items-center gap-3 bg-white/10 rounded-sm px-4 py-3 hover:bg-white/20 transition-colors">
+                <a href={`mailto:${headOfficeContact.email}`} className="flex items-center gap-3 bg-ivory/10 rounded-sm px-4 py-3 hover:bg-ivory/20 transition-colors">
                   <Mail className="h-5 w-5" />
                   <div>
-                    <div className="text-xs text-white/60">Email</div>
+                    <div className="text-xs text-ivory/60">Email</div>
                     <div className="font-bold">{headOfficeContact.email}</div>
                   </div>
                 </a>
-                <a href={`https://wa.me/${headOfficeContact.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-white/10 rounded-sm px-4 py-3 hover:bg-white/20 transition-colors">
+                <a href={`https://wa.me/${headOfficeContact.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-ivory/10 rounded-sm px-4 py-3 hover:bg-ivory/20 transition-colors">
                   <MessageCircle className="h-5 w-5" />
                   <div>
-                    <div className="text-xs text-white/60">WhatsApp</div>
+                    <div className="text-xs text-ivory/60">WhatsApp</div>
                     <div className="font-bold">{headOfficeContact.whatsapp}</div>
                   </div>
                 </a>
-                <a href="/#contact" className="block text-center bg-white text-forest-900 rounded-sm py-3 font-bold text-sm uppercase tracking-wider hover:bg-gray-100 mt-2">
+                <a href="/contact" className="block text-center bg-ivory text-forest-900 rounded-sm py-3 font-bold text-sm uppercase tracking-wider hover:bg-sand-100 mt-2">
                   Send Enquiry Form
                 </a>
               </div>
