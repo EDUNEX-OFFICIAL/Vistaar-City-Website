@@ -1,9 +1,9 @@
 # Vistar City
 # Memory — Living Engineering Context
 
-**Version:** 1.0.4  
+**Version:** 1.0.5  
 **Status:** Active (update every session)  
-**Last Updated:** 2026-09-13 (cloud IndexedDB cache + GSAP hero)  
+**Last Updated:** 2026-09-13 (push + redeploy 31aba00)  
 **Owner:** Active implementer (human or AI)  
 **Path:** `/srv/vistar-city/docs/Memory.md`
 
@@ -61,7 +61,7 @@ All docs: `/srv/vistar-city/docs/`
 | Field | Value |
 |-------|--------|
 | Phase | **Post Phase 6 — design.md rebuild** |
-| Status | Home hero = sunrise + Nephele clouds; bake quality/count scales with Network Information + resource timing. Not redeployed. |
+| Status | Design.md rebuild live: `vistar-city-web:31aba00` healthy; public `vistaarcity.edunexservices.in` 200. No GitHub Actions — manual `scripts/deploy.sh`. |
 | Owner | Eng |
 | Date | 2026-09-13 |
 
@@ -156,16 +156,22 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 1. Supply a real hero / site photograph (not another developer’s gate sign) and social URLs if they should appear.
 2. Supply a real customer quote before any testimonial section is added.
 3. Wire `lib/leads/persist.ts` when a dedicated database is ready.
-4. Redeploy only when a human asks.
+4. Optional: add GitHub Actions deploy so push auto-redeploys (none today).
 5. Do not wire Gemini.
 
 ---
 
 ## 9. Session log
 
+### 2026-09-13 — Git push + manual redeploy
+
+- Git already initialised; pushed `main` `31aba00` to `EDUNEX-OFFICIAL/Vistaar-City-Website`.
+- No `.github/workflows` — redeployed with `bash scripts/deploy.sh` (human asked deploy; Actions absent).
+- Image `vistar-city-web:31aba00` healthy on `127.0.0.1:3012`; public HTTPS `/` and `/api/health` 200.
+
 ### 2026-09-13 — Hero GSAP order: copy then navbar
 
-- Timeline after clouds: eyebrow + headline stagger → description → CTAs → proof → navbar last. Longer beats (~1.15–1.45s) for premium pacing. Not deployed.
+- Timeline after clouds: eyebrow + headline stagger → description → CTAs → proof → navbar last. Longer beats (~1.15–1.45s) for premium pacing. Deployed in `31aba00`.
 
 ### 2026-09-13 — Faster high/ultra bake
 
