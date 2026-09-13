@@ -168,6 +168,11 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 
 ## 9. Session log
 
+### 2026-09-13 — Push + deploy homepage rebuild
+
+- Pushed `main` `d56708d` → `EDUNEX-OFFICIAL/Vistaar-City-Website`. No `.github/workflows`.
+- Redeployed `bash scripts/deploy.sh` → image `vistar-city-web:d56708d` healthy `127.0.0.1:3012`; public `/` and `/api/health` 200.
+
 ### 2026-09-13 — CTA peaks watermark tone
 
 - Peaks stay logo shape but render as soft ivory abstract (`brightness-0 invert`, ~9% opacity) — not gold brand color.
