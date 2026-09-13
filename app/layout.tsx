@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Cormorant_Garamond, Satisfy, Source_Sans_3 } from "next/font/google";
 import CloudReveal from "@/components/home/CloudReveal";
 import HeroEntrance from "@/components/home/HeroEntrance";
 import { HeroRevealProvider } from "@/components/home/HeroReveal";
@@ -27,6 +27,15 @@ const sourceSans = Source_Sans_3({
   variable: "--font-source-sans",
 });
 
+/** Accent script only — More Than Land phrase. Not for headings/body. */
+const satisfy = Satisfy({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  adjustFontFallback: true,
+  variable: "--font-satisfy",
+});
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -37,7 +46,7 @@ export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${sourceSans.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${sourceSans.variable} ${satisfy.variable}`}>
       <body>
         <script
           dangerouslySetInnerHTML={{

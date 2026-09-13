@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Projects",
-  description: "Explore Vistar Green City in Patna, Vistar Enclave in Muzaffarpur, and Vistar Growth Corridor in Raxaul.",
+  description: "Explore Vistar City plotted developments across Bihar — including Patna, Muzaffarpur, Raxaul, Gaya and Bhagalpur.",
   path: "/projects",
 });
 
@@ -15,7 +15,7 @@ export default function ProjectsPage() {
     <>
       <PageHero
         eyebrow="Our projects"
-        title="Three places to begin."
+        title="Places to begin."
         lede="Published projects only. Prices and availability are not listed here — ask when you visit or enquire."
       />
       <section className="section-pad bg-ivory">

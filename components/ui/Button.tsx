@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import { trackEvent, type AnalyticsEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "accent";
 type Tone = "light" | "dark";
 
 const styles: Record<Tone, Record<Variant, string>> = {
@@ -16,6 +16,8 @@ const styles: Record<Tone, Record<Variant, string>> = {
     secondary:
       "border border-forest-900/20 text-forest-950 hover:border-forest-900/50 focus-visible:ring-forest-900 focus-visible:ring-offset-ivory",
     ghost: "px-0 text-forest-950 hover:text-forest-800",
+    accent:
+      "bg-gold-deep text-ivory hover:bg-gold-500 focus-visible:ring-forest-900 focus-visible:ring-offset-ivory",
   },
   dark: {
     primary:
@@ -23,6 +25,8 @@ const styles: Record<Tone, Record<Variant, string>> = {
     secondary:
       "border border-ivory/40 text-ivory hover:border-ivory focus-visible:ring-gold focus-visible:ring-offset-forest-950",
     ghost: "px-0 text-ivory hover:text-ivory-100",
+    accent:
+      "bg-gold-deep text-ivory hover:bg-gold-500 focus-visible:ring-gold focus-visible:ring-offset-forest-950",
   },
 };
 

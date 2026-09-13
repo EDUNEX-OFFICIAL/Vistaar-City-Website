@@ -4,7 +4,7 @@ import TrustRail from "@/components/home/TrustRail";
 import BrandStory from "@/components/home/BrandStory";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import BiharOpportunity from "@/components/home/BiharOpportunity";
-import LifestyleStory from "@/components/home/LifestyleStory";
+import WhatPeopleSay from "@/components/home/WhatPeopleSay";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export const metadata: Metadata = {
@@ -21,10 +21,10 @@ export default function HomePage() {
     <>
       <HomeHero />
       <TrustRail />
-      <BrandStory />
       <FeaturedProjects />
+      <BrandStory />
       <BiharOpportunity />
-      <LifestyleStory />
+      <WhatPeopleSay />
       <FinalCTA />
     </>
   );

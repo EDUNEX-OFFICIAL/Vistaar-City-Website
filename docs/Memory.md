@@ -1,9 +1,9 @@
 # Vistar City
 # Memory — Living Engineering Context
 
-**Version:** 1.0.5  
+**Version:** 1.0.13  
 **Status:** Active (update every session)  
-**Last Updated:** 2026-09-13 (push + redeploy 31aba00)  
+**Last Updated:** 2026-09-13 (CTA logo peaks asset)  
 **Owner:** Active implementer (human or AI)  
 **Path:** `/srv/vistar-city/docs/Memory.md`
 
@@ -95,11 +95,11 @@ Complete: clone, four docs, Cursor rules, README pointer. No Docker. No UI rewri
 | Gap | Notes |
 |-----|--------|
 | Lead persist stub | API routes live; `lib/leads/persist.ts` returns success without DB. |
-| Public plots removed | `/plots` redirects to `/contact`. Public catalogue is the three named projects only — no prices, counts, or status. |
-| Extra catalogue unpublished | `lib/projects.ts` still has Riverside / Hillside / Prime Estates and prices. Not linked from UI. Do not publish until the client confirms they are real. |
+| Public plots removed | `/plots` redirects to `/contact`. Public catalogue has no prices, counts, or status. |
+| Extra catalogue provisional | **2026-09-13 human override:** Riverside / Hillside / Prime Estates published in `lib/catalog.ts` so home carousel arrows work. Still provisional — confirm with client before treating as final product list. `lib/projects.ts` still has prices (not linked). |
 | No site photography | Existing JPGs show other brands (Greenfield Harmony, Emerald Gardens, Serene Meadows). Not used. Hero is an original illustration until a real photo is supplied. Spec path `/mnt/data/vistaar-hero-image.png` is not in the repo. |
-| Testimonials omitted | Spec forbids a fabricated customer quote. Section not shipped. |
-| Social omitted | No verified Facebook / Instagram / YouTube / LinkedIn URLs. |
+| Testimonials placeholder | **2026-09-13 override:** 3 anonymous placeholder slides + lifestyle WebP photos (`what-people-say-{1,2,3}.webp`). Not verified customers. Replace when real quotes arrive. |
+| Social omitted | No verified Facebook / Instagram / YouTube / LinkedIn URLs. Footer omits icons (2026-09-13 CTA/footer mock) — no `#` placeholders. |
 | Street address unpublished | Footer and contact say Patna, Bihar only. No “Placeholder Address”. |
 | Privacy / terms | Interim notices, not counsel-drafted policies. |
 | Gemini unused | `@google/genai` not imported. Not a product feature. |
@@ -127,6 +127,11 @@ No `picsum.photos` or other remote image hosts. Source: `lib/brand-images.ts` �
 
 | Date | Decision |
 |------|----------|
+| 2026-09-13 | **Human override:** Final CTA + Footer rebuilt from landing mock. Contact uses published `siteConfig` only (not mock phone/email). Social icons omitted until verified URLs. Footer signature column = Dream/Plan/Build/Belong; CTA uses `Button` accent (`gold-deep`). |
+| 2026-09-13 | **Human override:** Ship “What People Say” from `what-people-say-section-design.png` after Why Bihar. Uses design.md placeholder quote + anonymous “A Vistar City Customer”; lifestyle photo from mock with honest non-customer alt. Carousel arrows present but disabled until a second real quote exists. |
+| 2026-09-13 | **Human override:** Satisfy (`font-hand`) allowed as accent script for “Land for a better you” only — not headings/body. More Than Land section capped to ~one desktop viewport. |
+| 2026-09-13 | **Human override:** More Than Land rebuilt from `more-than-land-design.png` + provided photo; homepage drops LifestyleStory (overlap with new Brand Story copy/photo). |
+| 2026-09-13 | **Human override:** homepage order = Trust → Our Projects → Brand Story (“More than land”). Extra catalogue projects (Riverside, Hillside, Prime Estates) published without prices so carousel navigation is usable; still provisional pending client confirmation. |
 | 2026-09-13 | **ADR:** home intro uses GSAP timeline (navbar + hero stagger) after clouds ready; `motion` stays default elsewhere. Cloud sprites cached in IndexedDB (soft reload skips bake). |
 | 2026-09-13 | Cloud bake quality follows network: `saveData`/2g → low + fewer sprites; 3g/slow → mid; 4g/fast desktop → high; ultra only on fast + wide + enough RAM. |
 | 2026-09-12 | **Human override:** replace cartoon cloud reveal with CSS-Tricks Nephele clouds (SVG fractalNoise + displacement). Short sky preloader bakes high-res sprites first. Still skippable, home-only, not the old mountain intro. |
@@ -153,15 +158,99 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 
 ## 8. Next actions (≤5)
 
-1. Supply a real hero / site photograph (not another developer’s gate sign) and social URLs if they should appear.
-2. Supply a real customer quote before any testimonial section is added.
-3. Wire `lib/leads/persist.ts` when a dedicated database is ready.
-4. Optional: add GitHub Actions deploy so push auto-redeploys (none today).
+1. Supply verified social URLs if footer icons should appear.
+2. Replace placeholder testimonials when real customer quotes arrive.
+3. Supply a real hero / site photograph if it should replace current assets.
+4. Wire `lib/leads/persist.ts` when a dedicated database is ready.
 5. Do not wire Gemini.
 
 ---
 
 ## 9. Session log
+
+### 2026-09-13 — CTA peaks watermark tone
+
+- Peaks stay logo shape but render as soft ivory abstract (`brightness-0 invert`, ~9% opacity) — not gold brand color.
+
+### 2026-09-13 — CTA peaks = real logo mark
+
+- Removed zigzag SVG. CTA now uses `/brand/vistaar-peaks.webp` cropped from `vistaar-logo-dark.png` (true three overlapping brand mountains), soft opacity behind buttons.
+
+### 2026-09-13 — CTA brand peaks mark
+
+- Replaced jagged ridge SVG with logo-true three connected chevron peaks (gold gradient, soft opacity) behind Final CTA buttons.
+
+### 2026-09-13 — CTA + Footer polish
+
+- Cross-check vs mock: CTA buttons right column (~17.5rem), cleaner mountain silhouette, tighter wave; testimonials bottom pad tuned for wave handoff.
+- Footer: denser rhythm, gold section titles, published contact only, hand signature column; logo light-gold on forest verified. Still no social. No deploy.
+
+### 2026-09-13 — Final CTA + Footer (design mock)
+
+- Rebuilt `FinalCTA`: ivory wave top, “Ready to start your journey?” / “Let's Build a Brighter Tomorrow.”, gold-deep accent Site Visit + ghost Contact, mountain line SVG. No Dream/Plan column here.
+- Rebuilt `SiteFooter`: 4 cols (logo brand · Quick Links · Get in Touch · hand signature). Published `siteConfig` phone/email; Patna, Bihar (Head Office); no social; no Projects column; bottom Privacy/Terms.
+- `Button` dark/light `accent` → `bg-gold-deep`. No deploy.
+
+### 2026-09-13 — Two more testimonials (WebP)
+
+- Converted `family2.png` / `family3.png` → `/brand/what-people-say-2.webp` / `what-people-say-3.webp`; first slide also `what-people-say-1.webp` (removed `.jpg`).
+- `WhatPeopleSay` carousel: 3 anonymous placeholder quotes; arrows enabled; image swaps with slide. Honest alts. No deploy.
+
+### 2026-09-13 — What People Say section
+
+- **Override:** built section from `what-people-say-section-design.png` after `BiharOpportunity`, before `FinalCTA`.
+- New `WhatPeopleSay`: ivory band, heading “Growing Trust, Together.”, quote card, tilted lifestyle photo `/brand/what-people-say.jpg` (cropped from mock), hand “Real People / Real Dreams”, wave SVG. Anonymous attribution only.
+- Carousel controls match mock; disabled with one placeholder slide.
+- No deploy.
+
+### 2026-09-13 — Why Vistar City polish
+
+- Refined `TrustRail`: soft wave atmosphere, gold hairline under eyebrow, editorial 2×2 hairline grid (`gap-px`), Sprout icon, clearer leaf-stem accent, mobile words + stem. Hover only on icon (no card lift). No deploy.
+
+### 2026-09-13 — Real Bihar map from districts SVG
+
+- Built `/brand/bihar-map.svg` from `Bihar_districts.svg`: Labels removed; district fills sealed into one silhouette; SVG filter keeps ivory outer ring only (no internal district lines). Markers for Raxaul / Muzaffarpur / Patna overlaid in section.
+
+### 2026-09-13 — Bihar map path + ivory wave
+
+- Replaced blob outline with stylized Bihar SVG silhouette; markers Raxaul → Muzaffarpur → Patna on gold route.
+- Top wave fill solid `#fcfaf4` (page ivory) so curve no longer reads grey over the photo.
+
+### 2026-09-13 — Why Bihar, Why Now section
+
+- Rebuilt `BiharOpportunity` from `why-bihar-why-now.png`: photo bg `/brand/why-bihar-bg.png`, forest overlay, wave top, 3-col (copy + map + icon highlights), gold Explore Locations CTA. No return guarantees in copy.
+
+### 2026-09-13 — More Than Land viewport + hand font
+
+- Image height capped (`min(…svh, rem)`) so desktop section fits ~one viewport; tighter type/padding.
+- Added Satisfy as `font-hand` for “Land for a better you” only.
+
+### 2026-09-13 — More Than Land section
+
+- Rewrote `BrandStory` to match `more-than-land-design.png`: copy “A Place for What Matters Most.”, primary Our Story CTA, italic accent line, large TL-radius photo from `/brand/more-than-land.png` (copy of provided asset), vertical side words.
+- Removed `LifestyleStory` from homepage (redundant lifestyle block vs new photo section). Component file kept.
+- No deploy.
+
+### 2026-09-13 — Tighten early homepage section gaps
+
+- Why Vistar + Our Projects no longer use full `section-pad` (9rem×2 stacked ≈ huge ivory voids). Compact py; removed TrustRail `min-h-[22rem]` decorative rail stretch. Brand Story top padding reduced after projects.
+
+### 2026-09-13 — Projects before Brand Story + carousel catalogue
+
+- Homepage order: Hero → Why Vistar → **Our Projects** → Brand Story → …
+- Added Vistar Riverside, Hillside, Prime Estates to `lib/catalog` (no prices) so carousel next/prev works on desktop; form locations include Gaya + Bhagalpur.
+- **Override logged:** extra projects provisional until client confirms.
+
+### 2026-09-13 — Our Projects section
+
+- Rebuilt `FeaturedProjects` to match `public/landing page/our-projects section.png`: header “Communities for Every Dream” (gold-deep accent), View All Projects + circular carousel controls, horizontal snap carousel.
+- Redesigned `ProjectCard`: white card, location pill, `next/image` from `lib/catalog` (honest alt — representative marketing imagery), “Know More” CTA. `/projects` uses same card.
+- No deploy this session.
+
+### 2026-09-13 — Why Vistar City section (post-hero)
+
+- Rewrote `TrustRail` to match `public/landing page/why-vistaar section.png`: left copy (eyebrow + heading with gold-deep accent + body), 2×2 value grid (Leaf / FileCheck / Users / TrendingUp), desktop vertical Dream→Belong rail + botanical stroke SVG; mobile stacks + horizontal words.
+- No deploy this session.
 
 ### 2026-09-13 — Git push + manual redeploy
 

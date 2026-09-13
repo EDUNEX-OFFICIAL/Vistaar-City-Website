@@ -7,7 +7,7 @@ const phoneSchema = z
   .max(15, "Enter a valid mobile number")
   .regex(/^[\d\s+\-()]+$/, "Enter a valid mobile number");
 
-const locationSchema = z.enum(["Patna Region", "Muzaffarpur", "Raxaul"], {
+const locationSchema = z.enum(["Patna Region", "Muzaffarpur", "Raxaul", "Gaya", "Bhagalpur"], {
   message: "Select a location",
 });
 

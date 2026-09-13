@@ -1,38 +1,49 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import DreamScene from "@/components/brand/DreamScene";
+import { ArrowRight, MapPin } from "lucide-react";
 import { analyticsEvents, trackEvent } from "@/lib/analytics";
 import type { FeaturedProject } from "@/lib/catalog";
 import { routes } from "@/lib/routes";
+import { cn } from "@/lib/utils";
 
-const focuses = ["field", "home", "hills"] as const;
-
-export default function ProjectCard({ project, index }: { project: FeaturedProject; index: number }) {
+export default function ProjectCard({ project }: { project: FeaturedProject; index?: number }) {
   return (
-    <article className="group">
+    <article className="group flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-[0_8px_30px_rgba(24,34,31,0.06)] ring-1 ring-line/80">
       <Link
         href={`${routes.projects}/${project.slug}`}
         onClick={() => trackEvent(analyticsEvents.projectCta, { project: project.slug })}
-        className="block"
+        className="flex h-full flex-col"
       >
-        <div className="relative aspect-video overflow-hidden rounded-md bg-forest-950">
-          <DreamScene
-            focus={focuses[index % focuses.length]}
-            className="h-full w-full transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none"
+        <div className="relative aspect-[4/3] overflow-hidden bg-forest-950">
+          <Image
+            src={project.image}
+            alt={project.imageAlt}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className={cn(
+              "object-cover transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none",
+              project.imageClassName,
+            )}
           />
-          <p className="absolute bottom-3 left-3 text-[12px] text-ivory/85">Illustrated · not a site photo</p>
+          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-forest-950 shadow-sm backdrop-blur-sm">
+            <MapPin className="h-3.5 w-3.5 text-gold-deep" strokeWidth={1.75} aria-hidden />
+            {project.city}
+          </span>
         </div>
-        <div className="pt-5">
-          <h3 className="font-serif text-[1.7rem] text-forest-950">{project.name}</h3>
-          <p className="mt-1 text-sm text-muted">{project.location}</p>
-          <p className="mt-3 text-base leading-relaxed text-charcoal/80">{project.shortDescription}</p>
-          <p className="mt-4 text-[13px] text-muted">Plotted development · {project.city}</p>
-          <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-forest-950">
-            Explore Project
-            <ArrowUpRight
-              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-[3px]"
+
+        <div className="flex flex-1 flex-col p-5 md:p-6">
+          <h3 className="font-serif text-[1.65rem] leading-tight text-forest-950 md:text-[1.75rem]">
+            {project.name}
+          </h3>
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-charcoal/75 md:text-base">
+            {project.shortDescription}
+          </p>
+          <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest-950">
+            Know More
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
               strokeWidth={1.6}
               aria-hidden
             />
