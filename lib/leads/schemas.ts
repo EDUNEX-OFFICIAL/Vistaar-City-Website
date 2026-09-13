@@ -19,20 +19,23 @@ const optionalEmailSchema = z.preprocess(
 export const siteVisitLeadSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name").max(120),
   phone: phoneSchema,
-  location: locationSchema,
+  email: optionalEmailSchema,
+  location: locationSchema.optional(),
   preferredDate: z.string().trim().optional(),
   projectRef: z.string().trim().max(200).optional(),
+  message: z.string().trim().max(2000).optional(),
 });
 
 export const enquiryLeadSchema = z.object({
   name: z.string().trim().min(2, "Enter your full name").max(120),
   phone: phoneSchema,
   email: optionalEmailSchema,
-  location: locationSchema,
-  plotRequirement: z.enum(
-    ["Under 1000 sq.ft.", "1000 - 1500 sq.ft.", "Above 1500 sq.ft.", "Not sure yet"],
-    { message: "Select a plot requirement" },
-  ),
+  location: locationSchema.optional(),
+  plotRequirement: z
+    .enum(["Under 1000 sq.ft.", "1000 - 1500 sq.ft.", "Above 1500 sq.ft.", "Not sure yet"], {
+      message: "Select a plot requirement",
+    })
+    .optional(),
   message: z.string().trim().max(2000).optional(),
   projectRef: z.string().trim().max(200).optional(),
 });

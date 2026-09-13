@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
-import Header from "@/components/Header";
-import IntroProvider from "@/components/intro/IntroProvider";
+import CloudReveal from "@/components/home/CloudReveal";
+import HeroEntrance from "@/components/home/HeroEntrance";
+import { HeroRevealProvider } from "@/components/home/HeroReveal";
+import Navbar from "@/components/navigation/Navbar";
+import MobileCTA from "@/components/navigation/MobileCTA";
+import SiteFooter from "@/components/layout/SiteFooter";
 import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
 import { defaultMetadata } from "@/lib/site-metadata";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
   adjustFontFallback: true,
@@ -17,7 +21,7 @@ const cormorant = Cormorant_Garamond({
 
 const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
   adjustFontFallback: true,
   variable: "--font-source-sans",
@@ -34,27 +38,30 @@ export const metadata: Metadata = defaultMetadata;
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${sourceSans.variable}`}>
-      <head>
+      <body>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var d=document.documentElement;d.classList.add("intro-pending");var y=window.scrollY;if(y>12){d.classList.add("header-scrolled")}var m=window.matchMedia("(prefers-reduced-motion: reduce)");if(m.matches){d.classList.add("motion-reduce")}}catch(e){}})();`,
+            __html:
+              '(function(){try{var r=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(!r&&location.pathname==="/"){document.documentElement.classList.add("hero-intro","js-clouds")}}catch(e){}})();',
           }}
         />
         <noscript>
-          <style
-            dangerouslySetInnerHTML={{
-              __html:
-                "html.intro-pending .site-header{opacity:1!important;pointer-events:auto!important;visibility:visible!important}.site-preloader{display:none!important}.hero-reveal-pending .hero-reveal-item,.hero-reveal-pending .hero-reveal-line-inner,.hero-reveal-pending .hero-reveal-hairline,.hero-reveal-pending .hero-reveal-scrim,.hero-reveal-pending .hero-reveal-overlay,.hero-reveal-pending .hero-reveal-pillar,.hero-reveal-pending .hero-reveal-trust,.hero-reveal-pending .hero-reveal-bg,.hero-reveal-pending .hero-reveal-frame,.hero-reveal-pending .hero-reveal-card,.hero-reveal-pending .hero-reveal-inset,.hero-reveal-pending .hero-reveal-mat,.hero-reveal-pending .hero-reveal-rule{opacity:1!important;transform:none!important;filter:none!important;pointer-events:auto!important}",
-            }}
-          />
+          <style>{".cloud-layer{display:none!important}.hero-intro-item,.hero-line>span,.site-header{opacity:1!important;animation:none!important;pointer-events:auto!important}"}</style>
         </noscript>
-      </head>
-      <body suppressHydrationWarning>
+        <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:bg-ivory focus:px-3 focus:py-2">
+          Skip to content
+        </a>
+        <HeroRevealProvider>
+        <CloudReveal />
+        <HeroEntrance />
         <OrganizationJsonLd />
-        <IntroProvider>
-          <Header />
+        <Navbar />
+        <MobileCTA />
+        <main id="content" className="pb-20 lg:pb-0">
           {children}
-        </IntroProvider>
+        </main>
+        <SiteFooter />
+        </HeroRevealProvider>
       </body>
     </html>
   );

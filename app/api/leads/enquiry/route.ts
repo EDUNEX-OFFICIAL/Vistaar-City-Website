@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const { leadId } = await persistLead("enquiry", payload);
 
     return leadSuccess(
-      "Thank you. Our team will reach out with suitable options for your requirements.",
+      "Thank you. Your message has been received. Our team will contact you shortly.",
       leadId,
     );
   } catch {

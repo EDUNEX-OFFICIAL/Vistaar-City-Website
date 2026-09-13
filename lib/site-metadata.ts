@@ -5,7 +5,7 @@ export const siteConfig = {
   legalName: "Vistar City",
   tagline: "Dream Home Maker",
   description:
-    "Explore residential plots and plotted development projects across Patna, Muzaffarpur, Raxaul and other growing locations in Bihar.",
+    "Discover thoughtfully planned residential plots in Bihar's growing corridors. Explore Vistar City projects in Patna, Muzaffarpur and Raxaul, and book a site visit.",
   phone: "+919905006838",
   phoneDisplay: "+91 99050 06838",
   email: "info@vistarcity.com",
@@ -27,7 +27,7 @@ export const siteImages = {
   icon512: "/favicon-512x512.png",
 } as const;
 
-const defaultTitle = `${siteConfig.name} | Residential Plots & Land Projects in Bihar`;
+const defaultTitle = "Vistar City | Dream Home Maker — Premium Residential Plots in Bihar";
 
 /** Public site origin for metadataBase, OG URLs, and JSON-LD. Set in prod via NEXT_PUBLIC_SITE_URL. */
 export function getSiteUrl(): string {

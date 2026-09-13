@@ -7,4 +7,6 @@ export const routes = {
   siteVisit: "/site-visit",
   contact: "/contact",
   partner: "/become-a-partner",
+  privacy: "/privacy",
+  terms: "/terms",
 } as const;

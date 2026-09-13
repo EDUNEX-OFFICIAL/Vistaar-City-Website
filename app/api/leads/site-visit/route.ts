@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const { leadId } = await persistLead("site-visit", parsed.data);
 
     return leadSuccess(
-      "Thank you. Our team will contact you shortly to confirm your site visit.",
+      "Thank you. Your site visit request has been received. Our team will contact you shortly.",
       leadId,
     );
   } catch {

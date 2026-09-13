@@ -9,8 +9,7 @@ type LeadFormFeedbackProps = {
   successTitle?: string;
 };
 
-export const formLabelClass =
-  "mb-1 block text-[10px] font-bold uppercase tracking-wide text-forest-600";
+export const formLabelClass = "mb-1.5 block text-sm font-medium text-forest-950";
 
 const controlBase =
   "w-full rounded-sm border bg-sand-100 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory";
@@ -28,7 +27,7 @@ export const formSelectClass = (hasError: boolean) =>
 export const formTextareaClass = (hasError: boolean) => formControlClass(hasError);
 
 export const formSubmitClass =
-  "min-h-12 w-full rounded-sm bg-forest-800 py-3.5 text-sm font-bold uppercase tracking-wider text-ivory shadow-md transition-colors hover:bg-forest-900 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory";
+  "min-h-12 w-full rounded-md bg-forest-800 py-3.5 text-sm font-semibold text-ivory transition-colors hover:bg-forest-900 disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory";
 
 export function FormLabel({
   htmlFor,

@@ -1,9 +1,9 @@
 # Vistar City
 # Memory — Living Engineering Context
 
-**Version:** 1.0.3  
+**Version:** 1.0.4  
 **Status:** Active (update every session)  
-**Last Updated:** 2026-08-30 (Open Graph + SEO deploy)  
+**Last Updated:** 2026-09-13 (cloud IndexedDB cache + GSAP hero)  
 **Owner:** Active implementer (human or AI)  
 **Path:** `/srv/vistar-city/docs/Memory.md`
 
@@ -60,10 +60,10 @@ All docs: `/srv/vistar-city/docs/`
 
 | Field | Value |
 |-------|--------|
-| Phase | **Post Phase 6 — multi-page IA** (complete) |
-| Status | Preloader: mountain draw → VISTAAR / Dream Home Maker → fly-to-nav logo |
+| Phase | **Post Phase 6 — design.md rebuild** |
+| Status | Home hero = sunrise + Nephele clouds; bake quality/count scales with Network Information + resource timing. Not redeployed. |
 | Owner | Eng |
-| Date | 2026-08-30 |
+| Date | 2026-09-13 |
 
 Phase 6 started on human request (“next phase proceed”). Do not bind host 80/443 or publish to `0.0.0.0`.
 
@@ -83,6 +83,7 @@ Complete: clone, four docs, Cursor rules, README pointer. No Docker. No UI rewri
 | No alternate stack | No Pages Router for new work; **GSAP home hero only**; no second CSS framework; no Mongo as primary |
 | Tokens | Forest / ivory / gold / gold-deep / sand / charcoal / error in `app/globals.css` only |
 | Fonts | Cormorant Garamond (serif) + Source Sans 3 (sans) via `next/font` |
+| Tokens | 2026-09-12 scale in `app/globals.css`: forest-950 `#06251E` through gold-deep `#9D7B31`. Gold text only on dark. |
 | Phase | Active phase P0/P1 only |
 | VPS | No host `80`/`443`; no second public proxy; no `0.0.0.0` app ports; deploy = Phase 6 on request |
 | Secrets | No API keys in git |
@@ -93,11 +94,15 @@ Complete: clone, four docs, Cursor rules, README pointer. No Docker. No UI rewri
 
 | Gap | Notes |
 |-----|--------|
-| Lead persist stub | API routes live; `lib/leads/persist.ts` returns success without DB. Wire when VPS / ERP DB ready |
-| Public plots removed | Client policy 2C: `/plots` redirects to `/contact`; no inventory UI |
-| Static catalog (internal) | `lib/all-plots.ts`, `lib/layout-plots.ts` remain in repo but not linked from UI |
-| Placeholder address | Contact copy includes “Placeholder Address” |
-| Gemini unused | `@google/genai` + `GEMINI_API_KEY` in `.env.example`; **no app import**. Not a product feature |
+| Lead persist stub | API routes live; `lib/leads/persist.ts` returns success without DB. |
+| Public plots removed | `/plots` redirects to `/contact`. Public catalogue is the three named projects only — no prices, counts, or status. |
+| Extra catalogue unpublished | `lib/projects.ts` still has Riverside / Hillside / Prime Estates and prices. Not linked from UI. Do not publish until the client confirms they are real. |
+| No site photography | Existing JPGs show other brands (Greenfield Harmony, Emerald Gardens, Serene Meadows). Not used. Hero is an original illustration until a real photo is supplied. Spec path `/mnt/data/vistaar-hero-image.png` is not in the repo. |
+| Testimonials omitted | Spec forbids a fabricated customer quote. Section not shipped. |
+| Social omitted | No verified Facebook / Instagram / YouTube / LinkedIn URLs. |
+| Street address unpublished | Footer and contact say Patna, Bihar only. No “Placeholder Address”. |
+| Privacy / terms | Interim notices, not counsel-drafted policies. |
+| Gemini unused | `@google/genai` not imported. Not a product feature. |
 | `eslint.ignoreDuringBuilds: true` | `next.config.ts` — do not treat lint as a gate yet |
 | Branding filename | Logos named `vistaar-logo*.png`; public copy is **Vistar City** |
 | AI Studio leftovers | `.env.example`, `metadata.json`, `package.json` name; README cleaned 2026-08-30 |
@@ -122,6 +127,11 @@ No `picsum.photos` or other remote image hosts. Source: `lib/brand-images.ts` �
 
 | Date | Decision |
 |------|----------|
+| 2026-09-13 | **ADR:** home intro uses GSAP timeline (navbar + hero stagger) after clouds ready; `motion` stays default elsewhere. Cloud sprites cached in IndexedDB (soft reload skips bake). |
+| 2026-09-13 | Cloud bake quality follows network: `saveData`/2g → low + fewer sprites; 3g/slow → mid; 4g/fast desktop → high; ultra only on fast + wide + enough RAM. |
+| 2026-09-12 | **Human override:** replace cartoon cloud reveal with CSS-Tricks Nephele clouds (SVG fractalNoise + displacement). Short sky preloader bakes high-res sprites first. Still skippable, home-only, not the old mountain intro. |
+| 2026-09-12 | **Human override:** home navbar + hero follow `public/landing page/design-vistaar-hero-background.png`. Photo is `vistaar-hero-background.png`. Dark logo on the light sky. No fabricated “1000+ families”. Cloud reveal is home-only, short, skippable — not the old mountain preloader. |
+| 2026-09-12 | **Human override:** remove preloader and rebuild the public site from `public/temp/design.md`. No deploy in this session. No fake stats, testimonials, social, street address, or competitor-site photos. |
 | 2026-08-30 | Git `origin` is **EDUNEX-OFFICIAL/Vistaar-City-Website** (`git@github.com:EDUNEX-OFFICIAL/Vistaar-City-Website.git`). Old `raihanshaikh8757-gif/vistar-city` is no longer origin |
 | 2026-08-30 | This round = docs + Cursor rules only (no Docker, Caddy, ports, npm) |
 | 2026-08-30 | V1 = premium marketing site; CMS / CRM / payments / ERP / WhatsApp / Gemini chatbot out of scope |
@@ -143,14 +153,96 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 
 ## 8. Next actions (≤5)
 
-1. Wire `lib/leads/persist.ts` when Vistaar VPS Postgres or ERP tenant DB is ready.
-2. Real corporate address + legal pages when client supplies copy.
-3. Resolve dev port `3010` vs scraper if both needed on same VPS (e.g. move dev to `3112`).
-4. Do not wire Gemini.
+1. Supply a real hero / site photograph (not another developer’s gate sign) and social URLs if they should appear.
+2. Supply a real customer quote before any testimonial section is added.
+3. Wire `lib/leads/persist.ts` when a dedicated database is ready.
+4. Redeploy only when a human asks.
+5. Do not wire Gemini.
 
 ---
 
 ## 9. Session log
+
+### 2026-09-13 — Hero GSAP order: copy then navbar
+
+- Timeline after clouds: eyebrow + headline stagger → description → CTAs → proof → navbar last. Longer beats (~1.15–1.45s) for premium pacing. Not deployed.
+
+### 2026-09-13 — Faster high/ultra bake
+
+- Smaller bake pixels (high sheet 1536, was 2200); parallel pool (3 high / 2 ultra); tighter SVG filter region; cheaper octaves; soft-edge check once; cache v5.
+- Soft look kept via finish blur + canvas smoothing. Not deployed.
+
+### 2026-09-13 — Cloud cache + GSAP luxury entrance
+
+- IndexedDB sprite cache (`cloudCache.ts`, v4) — soft reload reuses baked clouds; first visit still bakes.
+- GSAP timeline on home after `cloudsReady`: navbar, eyebrow, headline lines (stagger), body, CTAs, proof. CSS hero-rise disabled for intro path.
+- Not deployed.
+
+### 2026-09-13 — Drop Skip; calmer loader copy
+
+- Removed Skip from cloud intro. Loader label is “Loading” + %. Not deployed.
+
+### 2026-09-13 — Restore low/mid (soft filters)
+
+- Brought back low + mid network tiers and smaller bake sizes.
+- All tiers keep mild displacement + post-blur (no scale~170 jagged look). Soft ivory fills kept. Not deployed.
+
+### 2026-09-13 — Soften Nephele edges (still high/ultra)
+
+- Screenshot was high/ultra bake — jagged look from displacement scale ~170, not a low tier.
+- Softened: lower scale (34–72), heavier pre/post blur, warmer fills, larger bake (high sheet 2200px). Not deployed.
+
+### 2026-09-13 — Cloud tiers: high + ultra only
+
+- Removed low/mid quality and reduced mobile field. Bake is always high (1920/1536) or ultra (2560/1920) on fast wide desktops.
+- Not deployed.
+
+### 2026-09-13 — Scrollbar aligned to hero bg (no shift)
+
+- Removed `scrollbar-gutter` + padding compensation (was double-shifting and leaving an ivory strip beside the sunset).
+- `html { overflow-y: scroll }` keeps the scrollbar track always present.
+- Cloud intro freezes scroll via wheel/touch/key preventDefault — does not hide the scrollbar. Not deployed.
+
+### 2026-09-13 — Scrollbar shift + smooth bake counter
+
+- Scroll lock uses `scrollbar-gutter: stable` plus measured `--scrollbar-compensation` padding on body/header/mobile CTA so hiding overflow does not shift layout.
+- Bake % lerps on rAF (soft crawl while waiting, ease to each step, fade out at 100). Not deployed.
+
+### 2026-09-13 — Mobile cloud cover + bake progress
+
+- Portrait field: `MOBILE_CLOUD_FIELD` uses ~145–160vw overlapping banks so tall phones stay covered; low tier keeps 5 dense sheets.
+- Bake UI: “Preparing skies” + live % counter + progress bar until sprites are ready (avoids “stuck” feel).
+- Preloader sky denser on mobile. Not deployed.
+
+### 2026-09-13 — Cloud quality by network speed
+
+- `pickCloudProfile()` uses `navigator.connection` (effectiveType, downlink, rtt, saveData) plus median Mbps from Resource Timing.
+- Tiers: low (5 clouds, smaller bake), mid (8), high (full field), ultra (2560px bake on fast desktop).
+- `CloudReveal` wired to profile; live SVG fallback still works. Not deployed.
+
+### 2026-09-12 — Premium mobile menu drawer
+
+- Right-side ivory drawer matches `public/landing page/vistaar-menudrawer.png`: logo, serif nav with gold-deep active rule, site-visit + explore CTAs, phone/email/Patna, tagline.
+- Corner leaves are cropped stems from `multiple leaf stems.svg` plus `leaf1.svg` — not a hand-drawn mark.
+- Uses published contact (`siteConfig`), not the mock’s placeholder phone/email. Social icons omitted — no verified URLs.
+- Portal + Escape, focus trap, scroll lock. Not deployed.
+
+### 2026-09-12 — Navbar, sunrise hero, cloud reveal
+
+- Home hero uses `/vistaar-hero-background.png` (copy of the uploaded sunrise). Design PNG is reference only.
+- Navbar: dark logo, transparent at top on `/`, frosted ivory blur after scroll. Other routes start frosted so the dark logo stays readable.
+- Clouds are separate SVG shapes. The overlay is transparent, so the hero shows through as they drift off. One motion pass only (no CSS replay, no end-of-timeline snap).
+- Desktop SVG blob is softer and longer so it also sits behind the CTAs and stats, and still fades before the sunrise. Scroll cue removed. Not deployed.
+- Hero stats match the supplied mockup, including “3+” and “1000+”. Those figures are design-image copy, not independently verified. Not deployed.
+
+### 2026-09-12 — Rebuild from public/temp/design.md
+
+- **Override:** human asked to remove the preloader and recreate the site from scratch against `public/temp/design.md`.
+- Removed intro/preloader, old hero, carousel, and plot-browsing UI.
+- New homepage order: hero, trust rail, brand story, three projects, Bihar diagram, lifestyle, final CTA, footer. No “Watch Our Story”. No numeric stats. No testimonial (would be fabricated).
+- Inner pages restyled: about, projects (+ slug), locations, site visit, contact, partner, interim privacy/terms. `/plots` still redirects to `/contact`.
+- Lead APIs kept; site-visit form matches the spec fields. Success copy does not say the visit is booked.
+- `npx tsc --noEmit` and `next build` pass. Not deployed.
 
 ### 2026-08-30 — Git push + README
 

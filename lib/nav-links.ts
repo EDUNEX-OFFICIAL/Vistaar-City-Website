@@ -5,18 +5,6 @@ export const mainNavLinks = [
   { label: "About", href: routes.about },
   { label: "Projects", href: routes.projects },
   { label: "Locations", href: routes.locations },
-  { label: "Enquire", href: routes.contact },
-] as const;
-
-export const partnerNavLink = {
-  label: "Become a Partner",
-  href: routes.partner,
-} as const;
-
-export const navLinks = [...mainNavLinks, partnerNavLink] as const;
-
-export const footerLinks = [
-  ...mainNavLinks,
-  { label: "Site Visit", href: routes.siteVisit },
-  partnerNavLink,
+  { label: "Become a Partner", href: routes.partner },
+  { label: "Contact", href: routes.contact },
 ] as const;

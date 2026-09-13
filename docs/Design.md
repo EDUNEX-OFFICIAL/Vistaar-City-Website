@@ -1,12 +1,12 @@
 # Vistar City
 # Design System & UX Standards
 
-**Version:** 1.3.0  
-**Status:** Active — visual authority  
-**Last Updated:** 2026-08-30 (premium third-party libraries — React Bits, motion, GSAP hero)  
+**Version:** 1.3.1  
+**Status:** Overridden for the 2026-09-12 rebuild — follow `public/temp/design.md`  
+**Last Updated:** 2026-09-12  
 **Owner:** Design + Frontend  
 
-If UI conflicts with this file, change the UI — not the brand — unless a token change is logged in `Memory.md`.
+Human override (2026-09-12): rebuild the public site from `public/temp/design.md`. Preloader removed. Do not restore the old hero, GSAP timeline, or mountain intro unless a human asks. Token family stays forest / ivory / gold. If this file and `public/temp/design.md` disagree, the uploaded spec wins for layout and copy; WCAG still blocks gold text on ivory.
 
 ---
 
