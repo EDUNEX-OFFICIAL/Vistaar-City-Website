@@ -1,9 +1,9 @@
 # Vistar City
 # Memory — Living Engineering Context
 
-**Version:** 1.0.13  
+**Version:** 1.0.14  
 **Status:** Active (update every session)  
-**Last Updated:** 2026-09-13 (CTA logo peaks asset)  
+**Last Updated:** 2026-09-13 (push + deploy d56708d)  
 **Owner:** Active implementer (human or AI)  
 **Path:** `/srv/vistar-city/docs/Memory.md`
 
@@ -61,7 +61,7 @@ All docs: `/srv/vistar-city/docs/`
 | Field | Value |
 |-------|--------|
 | Phase | **Post Phase 6 — design.md rebuild** |
-| Status | Design.md rebuild live: `vistar-city-web:31aba00` healthy; public `vistaarcity.edunexservices.in` 200. No GitHub Actions — manual `scripts/deploy.sh`. |
+| Status | Design rebuild live: `vistar-city-web:d56708d` healthy; public `vistaarcity.edunexservices.in` 200. No GitHub Actions — manual `scripts/deploy.sh`. |
 | Owner | Eng |
 | Date | 2026-09-13 |
 
