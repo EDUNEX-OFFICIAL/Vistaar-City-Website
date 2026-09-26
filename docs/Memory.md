@@ -1,9 +1,9 @@
 # Vistar City
 # Memory — Living Engineering Context
 
-**Version:** 1.0.14  
+**Version:** 1.0.17  
 **Status:** Active (update every session)  
-**Last Updated:** 2026-09-13 (push + deploy d56708d)  
+**Last Updated:** 2026-09-13 (deploy 34f4aaa + working tree)  
 **Owner:** Active implementer (human or AI)  
 **Path:** `/srv/vistar-city/docs/Memory.md`
 
@@ -61,7 +61,7 @@ All docs: `/srv/vistar-city/docs/`
 | Field | Value |
 |-------|--------|
 | Phase | **Post Phase 6 — design.md rebuild** |
-| Status | Design rebuild live: `vistar-city-web:d56708d` healthy; public `vistaarcity.edunexservices.in` 200. No GitHub Actions — manual `scripts/deploy.sh`. |
+| Status | Deployed: `vistar-city-web:34f4aaa` healthy on `127.0.0.1:3012`. Includes uncommitted mobile audit + Design.md consolidate (image built from working tree). Manual `scripts/deploy.sh`. |
 | Owner | Eng |
 | Date | 2026-09-13 |
 
@@ -127,6 +127,7 @@ No `picsum.photos` or other remote image hosts. Source: `lib/brand-images.ts` �
 
 | Date | Decision |
 |------|----------|
+| 2026-09-13 | **ADR:** Single Design.md at `docs/Design.md` only. Content = current rebuild spec (ex-`public/temp/design.md`) + engineering locks matching `globals.css`. Deleted `public/temp/design.md`. |
 | 2026-09-13 | **Human override:** Final CTA + Footer rebuilt from landing mock. Contact uses published `siteConfig` only (not mock phone/email). Social icons omitted until verified URLs. Footer signature column = Dream/Plan/Build/Belong; CTA uses `Button` accent (`gold-deep`). |
 | 2026-09-13 | **Human override:** Ship “What People Say” from `what-people-say-section-design.png` after Why Bihar. Uses design.md placeholder quote + anonymous “A Vistar City Customer”; lifestyle photo from mock with honest non-customer alt. Carousel arrows present but disabled until a second real quote exists. |
 | 2026-09-13 | **Human override:** Satisfy (`font-hand`) allowed as accent script for “Land for a better you” only — not headings/body. More Than Land section capped to ~one desktop viewport. |
@@ -136,7 +137,7 @@ No `picsum.photos` or other remote image hosts. Source: `lib/brand-images.ts` �
 | 2026-09-13 | Cloud bake quality follows network: `saveData`/2g → low + fewer sprites; 3g/slow → mid; 4g/fast desktop → high; ultra only on fast + wide + enough RAM. |
 | 2026-09-12 | **Human override:** replace cartoon cloud reveal with CSS-Tricks Nephele clouds (SVG fractalNoise + displacement). Short sky preloader bakes high-res sprites first. Still skippable, home-only, not the old mountain intro. |
 | 2026-09-12 | **Human override:** home navbar + hero follow `public/landing page/design-vistaar-hero-background.png`. Photo is `vistaar-hero-background.png`. Dark logo on the light sky. No fabricated “1000+ families”. Cloud reveal is home-only, short, skippable — not the old mountain preloader. |
-| 2026-09-12 | **Human override:** remove preloader and rebuild the public site from `public/temp/design.md`. No deploy in this session. No fake stats, testimonials, social, street address, or competitor-site photos. |
+| 2026-09-12 | **Human override:** remove preloader and rebuild the public site from the landing design spec (now `docs/Design.md`; was temporarily `public/temp/design.md`). No deploy in this session. No fake stats, testimonials, social, street address, or competitor-site photos. |
 | 2026-08-30 | Git `origin` is **EDUNEX-OFFICIAL/Vistaar-City-Website** (`git@github.com:EDUNEX-OFFICIAL/Vistaar-City-Website.git`). Old `raihanshaikh8757-gif/vistar-city` is no longer origin |
 | 2026-08-30 | This round = docs + Cursor rules only (no Docker, Caddy, ports, npm) |
 | 2026-08-30 | V1 = premium marketing site; CMS / CRM / payments / ERP / WhatsApp / Gemini chatbot out of scope |
@@ -158,7 +159,7 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 
 ## 8. Next actions (≤5)
 
-1. Supply verified social URLs if footer icons should appear.
+1. Supply verified social URLs if footer icons should appear (drawer still omits them).
 2. Replace placeholder testimonials when real customer quotes arrive.
 3. Supply a real hero / site photograph if it should replace current assets.
 4. Wire `lib/leads/persist.ts` when a dedicated database is ready.
@@ -167,6 +168,25 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 ---
 
 ## 9. Session log
+
+### 2026-09-13 — Deploy (human asked)
+
+- `bash scripts/deploy.sh` → `vistar-city-web:34f4aaa` healthy `127.0.0.1:3012/api/health`.
+- Working-tree changes (mobile/desktop audit, menu drawer, single Design.md) baked into image; not yet committed/pushed.
+
+### 2026-09-13 — Single Design.md (canonical)
+
+- Kept current rebuild design (tokens match `globals.css`) as sole `docs/Design.md`.
+- Deleted duplicate `public/temp/design.md` and empty `public/temp/`.
+- Prepended engineering locks (WCAG gold, mobile-first, fonts, motion) so agent law stays with the page spec.
+- No deploy.
+
+### 2026-09-13 — Homepage mobile/desktop audit + menu drawer
+
+- Fixed: navbar double horizontal padding vs `site-wrap`; ivory hamburger on light hero (now forest always); `main pb-20` ivory gap before footer → clearance on footer + Final CTA; CTA green aligned to `forest-950`.
+- Hero mobile: stacked full-width CTAs ≥48px; projects carousel peeks next card; Brand Story / Bihar / testimonials mobile stacking cleaned.
+- Menu drawer: sticky logo/close chrome, sans nav (Design.md), stagger + exit anim, stronger scrim, 48px contact targets, focus rings. No fake social.
+- No deploy this session.
 
 ### 2026-09-13 — Push + deploy homepage rebuild
 
@@ -335,9 +355,9 @@ None for go-live smoke. Future: lead DB, legal copy, optional dev port split fro
 - Desktop SVG blob is softer and longer so it also sits behind the CTAs and stats, and still fades before the sunrise. Scroll cue removed. Not deployed.
 - Hero stats match the supplied mockup, including “3+” and “1000+”. Those figures are design-image copy, not independently verified. Not deployed.
 
-### 2026-09-12 — Rebuild from public/temp/design.md
+### 2026-09-12 — Rebuild from landing design spec
 
-- **Override:** human asked to remove the preloader and recreate the site from scratch against `public/temp/design.md`.
+- **Override:** human asked to remove the preloader and recreate the site from scratch against the landing design spec (then at `public/temp/design.md`; now sole file `docs/Design.md`).
 - Removed intro/preloader, old hero, carousel, and plot-browsing UI.
 - New homepage order: hero, trust rail, brand story, three projects, Bihar diagram, lifestyle, final CTA, footer. No “Watch Our Story”. No numeric stats. No testimonial (would be fabricated).
 - Inner pages restyled: about, projects (+ slug), locations, site visit, contact, partner, interim privacy/terms. `/plots` still redirects to `/contact`.

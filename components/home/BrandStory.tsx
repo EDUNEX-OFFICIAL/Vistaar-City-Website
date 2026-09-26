@@ -51,11 +51,11 @@ export default function BrandStory() {
             with — Vistar City gives you the space to turn your dreams into reality.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-end gap-5 md:mt-7 md:gap-6">
-            <Button href={routes.about} variant="primary">
+          <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:gap-5 md:mt-7 md:gap-6">
+            <Button href={routes.about} variant="primary" className="w-full justify-center sm:w-auto">
               Our Story
             </Button>
-            <p className="relative pb-1 font-hand text-[1.65rem] leading-none text-forest-950 md:text-[1.85rem]" aria-hidden>
+            <p className="relative pb-1 font-hand text-[1.55rem] leading-none text-forest-950 sm:text-[1.65rem] md:text-[1.85rem]" aria-hidden>
               Land for a better you
               <span className="absolute -bottom-0.5 left-0 h-[3px] w-[92%] origin-left -rotate-2 rounded-full bg-gold-deep/70" />
             </p>

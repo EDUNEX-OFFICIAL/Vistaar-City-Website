@@ -66,9 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <OrganizationJsonLd />
         <Navbar />
         <MobileCTA />
-        <main id="content" className="pb-20 lg:pb-0">
-          {children}
-        </main>
+        <main id="content">{children}</main>
         <SiteFooter />
         </HeroRevealProvider>
       </body>

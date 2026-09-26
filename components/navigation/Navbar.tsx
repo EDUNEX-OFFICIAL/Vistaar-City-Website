@@ -40,7 +40,8 @@ export default function Navbar() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="site-wrap flex h-16 items-center gap-2 px-4 sm:px-5 lg:grid lg:h-[4.75rem] lg:grid-cols-[auto_1fr_auto] lg:gap-3 lg:px-16">
+      {/* site-wrap already owns horizontal padding — do not double-pad */}
+      <div className="site-wrap flex h-16 items-center gap-2 lg:grid lg:h-[4.75rem] lg:grid-cols-[auto_1fr_auto] lg:gap-3">
         <Link href={routes.home} className="shrink-0">
           <Image
             src="/vistaar-logo-dark.png"
@@ -75,7 +76,7 @@ export default function Navbar() {
           <Link
             href={routes.siteVisit}
             onClick={() => trackEvent(analyticsEvents.heroSiteVisit)}
-            className="inline-flex h-9 items-center gap-1 rounded-md bg-forest-950 px-2.5 text-[11px] font-semibold text-ivory hover:bg-forest-900 sm:h-10 sm:px-3 sm:text-xs lg:hidden"
+            className="inline-flex h-10 items-center gap-1 rounded-md bg-forest-950 px-2.5 text-[11px] font-semibold text-ivory hover:bg-forest-900 sm:px-3 sm:text-xs lg:hidden"
           >
             Book a Site Visit
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.6} aria-hidden />
@@ -90,12 +91,7 @@ export default function Navbar() {
           </Link>
           <button
             type="button"
-            className={cn(
-              "inline-flex h-10 w-10 items-center justify-center rounded-full border lg:hidden",
-              isHome && !scrolled && !open
-                ? "border-ivory/80 bg-white/20 text-ivory"
-                : "border-forest-900/25 bg-transparent text-forest-950",
-            )}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-forest-900/25 bg-white/55 text-forest-950 backdrop-blur-sm lg:hidden"
             aria-expanded={open}
             aria-controls={menuId}
             onClick={() => setOpen((value) => !value)}

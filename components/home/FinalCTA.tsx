@@ -35,7 +35,7 @@ export default function FinalCTA() {
         />
       </div>
 
-      <div className="site-wrap relative z-[1] grid items-center gap-8 pb-12 pt-[4.5rem] md:gap-10 md:pb-14 md:pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-16 lg:pt-24">
+      <div className="site-wrap relative z-[1] grid items-center gap-8 pb-[calc(3rem+4.5rem)] pt-[4.5rem] md:gap-10 md:pb-[calc(3.5rem+4.5rem)] md:pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-16 lg:pt-24">
         <Reveal className="lg:col-span-7 xl:col-span-8">
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-gold md:mb-4">
             Ready to start your journey?

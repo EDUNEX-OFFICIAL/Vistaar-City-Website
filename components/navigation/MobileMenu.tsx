@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Mail, MapPin, Phone, X } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { analyticsEvents, trackEvent } from "@/lib/analytics";
 import { mainNavLinks } from "@/lib/nav-links";
@@ -27,6 +27,11 @@ export default function MobileMenu({
   const panelRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const reduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -76,153 +81,188 @@ export default function MobileMenu({
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   const ease = [0.22, 1, 0.36, 1] as const;
+  const linkDelay = reduce ? 0 : 0.08;
 
   return createPortal(
-    <div className="fixed inset-0 z-[200] lg:hidden">
-      <motion.div
-        className="absolute inset-0 bg-forest-950/35"
-        initial={reduce ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.28, ease: "easeOut" }}
-        onClick={onClose}
-        aria-hidden
-      />
+    <AnimatePresence>
+      {open ? (
+        <motion.div
+          key="mobile-menu"
+          className="fixed inset-0 z-[200] lg:hidden"
+          initial={false}
+          exit={reduce ? undefined : { opacity: 1 }}
+        >
+          <motion.button
+            type="button"
+            className="absolute inset-0 bg-forest-950/40 backdrop-blur-[2px]"
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
+            onClick={onClose}
+            aria-label="Close menu"
+          />
 
-      <motion.div
-        id={id}
-        ref={panelRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={`${id}-title`}
-        className="absolute inset-y-0 right-0 flex w-[calc(100%-2.75rem)] max-w-[28rem] flex-col overflow-hidden bg-ivory shadow-[-18px_0_48px_rgba(6,37,30,0.16)]"
-        initial={reduce ? false : { x: "100%" }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.46, ease }}
-      >
-        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-6 pb-[max(1.75rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-8">
-          <div className="flex items-start justify-between gap-3">
-            <Link href={routes.home} onClick={onClose} className="mt-1 shrink-0 rounded-sm">
-              <Image
-                src={siteImages.logoDark}
-                alt="Vistar City — Dream Home Maker"
-                width={180}
-                height={66}
-                className="h-auto w-[7.75rem]"
-              />
-            </Link>
-            <button
-              type="button"
-              data-menu-close
-              onClick={onClose}
-              className="-mr-2 flex size-12 shrink-0 items-center justify-center rounded-full text-forest-950"
-              aria-label="Close menu"
-            >
-              <X className="size-[1.35rem]" strokeWidth={1.35} aria-hidden />
-            </button>
-          </div>
+          <motion.div
+            id={id}
+            ref={panelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`${id}-title`}
+            className="absolute inset-y-0 right-0 flex w-[min(100%-2.5rem,22rem)] max-w-[22rem] flex-col overflow-hidden bg-ivory shadow-[-18px_0_48px_rgba(6,37,30,0.18)] sm:w-[min(100%-3rem,24rem)] sm:max-w-[24rem]"
+            initial={reduce ? false : { x: "100%" }}
+            animate={{ x: 0 }}
+            exit={reduce ? undefined : { x: "100%" }}
+            transition={{ duration: 0.42, ease }}
+          >
+            {/* Sticky chrome */}
+            <div className="relative z-20 flex shrink-0 items-center justify-between gap-3 border-b border-forest-900/10 bg-ivory/95 px-5 pt-[max(0.85rem,env(safe-area-inset-top))] pb-3 backdrop-blur-sm sm:px-7">
+              <Link
+                href={routes.home}
+                onClick={onClose}
+                className="shrink-0 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+              >
+                <Image
+                  src={siteImages.logoDark}
+                  alt="Vistar City — Dream Home Maker"
+                  width={180}
+                  height={66}
+                  className="h-auto w-[7.25rem]"
+                />
+              </Link>
+              <button
+                type="button"
+                data-menu-close
+                onClick={onClose}
+                className="flex size-12 shrink-0 items-center justify-center rounded-full text-forest-950 transition-colors hover:bg-forest-900/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                aria-label="Close menu"
+              >
+                <X className="size-[1.35rem]" strokeWidth={1.35} aria-hidden />
+              </button>
+            </div>
 
-          <h2 id={`${id}-title`} className="sr-only">
-            Menu
-          </h2>
+            <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-6 sm:px-7">
+              <h2 id={`${id}-title`} className="sr-only">
+                Menu
+              </h2>
 
-          <nav className="mt-10 flex flex-col" aria-label="Mobile">
-            {mainNavLinks.map((link) => {
-              const active = link.href === routes.home ? pathname === "/" : pathname.startsWith(link.href);
-              return (
+              <nav className="flex flex-col" aria-label="Mobile">
+                {mainNavLinks.map((link, index) => {
+                  const active =
+                    link.href === routes.home ? pathname === "/" : pathname.startsWith(link.href);
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={reduce ? false : { opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: linkDelay + index * 0.04, ease }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={onClose}
+                        className="group flex min-h-12 items-center py-2.5 text-forest-950 focus-visible:outline-none"
+                        aria-current={active ? "page" : undefined}
+                      >
+                        <span
+                          className={cn(
+                            "relative font-sans text-[1.35rem] font-medium leading-none tracking-tight transition-colors sm:text-[1.45rem]",
+                            active ? "text-forest-950" : "text-forest-950/80 group-hover:text-forest-950",
+                          )}
+                        >
+                          {link.label}
+                          <span
+                            className={cn(
+                              "absolute -bottom-2 left-0 h-0.5 w-7 rounded-sm bg-gold-deep transition-opacity",
+                              active ? "opacity-100" : "opacity-0 group-hover:opacity-40",
+                            )}
+                          />
+                        </span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
+
+              <motion.div
+                className="mt-7 flex flex-col gap-3"
+                initial={reduce ? false : { opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: linkDelay + 0.28, ease }}
+              >
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={onClose}
-                  className="group flex min-h-12 items-center py-2.5 text-forest-950"
-                  aria-current={active ? "page" : undefined}
+                  href={routes.siteVisit}
+                  onClick={() => {
+                    trackEvent(analyticsEvents.finalSiteVisit, { surface: "menu" });
+                    onClose();
+                  }}
+                  className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-forest-950 px-5 text-[15px] font-semibold text-ivory hover:bg-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950"
                 >
-                  <span className="relative font-serif text-[clamp(1.5rem,6.4vw,1.8rem)] font-medium leading-none tracking-tight transition-colors group-hover:text-forest-800">
-                    {link.label}
-                    <span
-                      className={cn(
-                        "absolute -bottom-2 left-0 h-0.5 w-7 rounded-sm bg-gold-deep transition-opacity",
-                        active ? "opacity-100" : "opacity-0",
-                      )}
-                    />
-                  </span>
+                  Book a Site Visit
+                  <ArrowRight
+                    className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+                    strokeWidth={1.6}
+                    aria-hidden
+                  />
                 </Link>
-              );
-            })}
-          </nav>
+                <Link
+                  href={routes.projects}
+                  onClick={() => {
+                    trackEvent(analyticsEvents.projectView, { surface: "menu" });
+                    onClose();
+                  }}
+                  className="inline-flex min-h-12 items-center justify-center rounded-lg border border-forest-950/70 bg-ivory px-5 text-[15px] font-semibold text-forest-950 hover:bg-sand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                >
+                  Explore Projects
+                </Link>
+              </motion.div>
 
-          <div className="mt-6 flex flex-col gap-3">
-            <Link
-              href={routes.siteVisit}
-              onClick={() => {
-                trackEvent(analyticsEvents.finalSiteVisit, { surface: "menu" });
-                onClose();
-              }}
-              className="group inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-lg bg-forest-950 px-5 text-[15px] font-semibold text-ivory hover:bg-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950"
-            >
-              Book a Site Visit
-              <ArrowRight
-                className="size-4 transition-transform duration-200 group-hover:translate-x-1"
-                strokeWidth={1.6}
-                aria-hidden
-              />
-            </Link>
-            <Link
-              href={routes.projects}
-              onClick={() => {
-                trackEvent(analyticsEvents.projectView, { surface: "menu" });
-                onClose();
-              }}
-              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-lg border border-forest-950/70 bg-ivory px-5 text-[15px] font-semibold text-forest-950 hover:bg-sand-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
-            >
-              Explore Projects
-            </Link>
-          </div>
+              <div className="my-7 h-px bg-forest-900/10" />
 
-          <div className="my-7 h-px bg-forest-900/10" />
+              <ul className="space-y-1 text-[15px] text-forest-900">
+                <li>
+                  <a
+                    href={`tel:${siteConfig.phone}`}
+                    onClick={() => trackEvent(analyticsEvents.phoneClick, { surface: "menu" })}
+                    className="inline-flex min-h-12 w-full items-center gap-3 rounded-md px-1 transition-colors hover:text-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                  >
+                    <Phone className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />
+                    {siteConfig.phoneDisplay}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    onClick={() => trackEvent(analyticsEvents.contactClick, { surface: "menu" })}
+                    className="inline-flex min-h-12 w-full items-center gap-3 rounded-md px-1 transition-colors hover:text-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-900 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                  >
+                    <Mail className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />
+                    {siteConfig.email}
+                  </a>
+                </li>
+                <li className="inline-flex min-h-12 w-full items-center gap-3 px-1">
+                  <MapPin className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />
+                  Patna, Bihar
+                </li>
+              </ul>
 
-          <ul className="space-y-3.5 text-[15px] text-forest-900">
-            <li>
-              <a
-                href={`tel:${siteConfig.phone}`}
-                onClick={() => trackEvent(analyticsEvents.phoneClick, { surface: "menu" })}
-                className="inline-flex min-h-11 items-center gap-3"
-              >
-                <Phone className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />
-                {siteConfig.phoneDisplay}
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                onClick={() => trackEvent(analyticsEvents.contactClick, { surface: "menu" })}
-                className="inline-flex min-h-11 items-center gap-3"
-              >
-                <Mail className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />
-                {siteConfig.email}
-              </a>
-            </li>
-            <li className="inline-flex min-h-11 items-center gap-3">
-              <MapPin className="size-4 shrink-0" strokeWidth={1.5} aria-hidden />
-              Patna, Bihar
-            </li>
-          </ul>
+              <div className="relative z-10 mt-auto max-w-[12.5rem] pt-10">
+                <p className="font-sans text-[11px] font-medium uppercase leading-[1.65] tracking-[0.2em] text-forest-800">
+                  Same dreams.
+                  <br />
+                  Bigger tomorrows.
+                </p>
+                <span className="mt-3 block h-px w-9 bg-gold-deep" aria-hidden />
+              </div>
+            </div>
 
-          <div className="relative z-10 mt-auto max-w-[12.5rem] pt-12">
-            <p className="font-sans text-[11px] font-medium uppercase leading-[1.65] tracking-[0.2em] text-forest-800">
-              Same dreams.
-              <br />
-              Bigger tomorrows.
-            </p>
-            <span className="mt-3 block h-px w-9 bg-gold-deep" aria-hidden />
-          </div>
-
-        </div>
-        <BotanicalMark />
-      </motion.div>
-    </div>,
+            <BotanicalMark />
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>,
     document.body,
   );
 }

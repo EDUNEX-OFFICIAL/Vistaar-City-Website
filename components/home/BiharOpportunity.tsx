@@ -105,7 +105,7 @@ export default function BiharOpportunity() {
         </Reveal>
 
         <Reveal className="lg:col-span-3" delay={0.14}>
-          <ul className="flex flex-row flex-wrap justify-center gap-8 lg:flex-col lg:items-start lg:gap-10 lg:border-l lg:border-ivory/15 lg:pl-8">
+          <ul className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-8 lg:flex-col lg:items-start lg:gap-10 lg:border-l lg:border-ivory/15 lg:pl-8">
             {highlights.map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-3 text-sm font-medium text-ivory md:text-base">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold/40 text-gold">

@@ -23,11 +23,11 @@ export default function MobileCTA() {
   if (hidden || !show) return null;
 
   return (
-    <div className="mobile-cta-bar fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ivory/95 p-3 backdrop-blur-md lg:hidden">
+    <div className="mobile-cta-bar fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ivory/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md lg:hidden">
       <Link
         href={routes.siteVisit}
         onClick={() => trackEvent(analyticsEvents.finalSiteVisit, { surface: "mobile_bar" })}
-        className="flex min-h-12 items-center justify-center rounded-md bg-forest-800 text-sm font-semibold text-ivory"
+        className="flex min-h-12 items-center justify-center rounded-md bg-forest-950 text-sm font-semibold text-ivory hover:bg-forest-900"
       >
         Book a Site Visit
       </Link>

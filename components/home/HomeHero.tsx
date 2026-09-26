@@ -108,10 +108,10 @@ export default function HomeHero() {
           Thoughtfully planned residential plots in Bihar&apos;s growth corridors — for your family, your future, and a
           more fulfilling life.
         </p>
-        <div className="hero-intro-item hero-d4 mt-5 flex flex-wrap gap-2.5">
+        <div className="hero-intro-item hero-d4 mt-5 flex w-full max-w-[20.5rem] flex-col gap-2.5 sm:max-w-none sm:flex-row sm:flex-wrap md:max-w-none">
           <Button
             href={routes.siteVisit}
-            className="h-11 w-auto rounded-md bg-forest-950 px-5 text-[13px] hover:bg-forest-900"
+            className="min-h-12 w-full rounded-md bg-forest-950 px-5 text-sm hover:bg-forest-900 sm:w-auto"
             event={analyticsEvents.heroSiteVisit}
           >
             Book a Site Visit
@@ -119,7 +119,7 @@ export default function HomeHero() {
           <Button
             href={routes.projects}
             variant="secondary"
-            className="h-11 w-auto rounded-md border-forest-900/20 bg-ivory/80 px-4 text-[13px] text-forest-950 hover:bg-ivory md:bg-ivory/25"
+            className="min-h-12 w-full rounded-md border-forest-900/20 bg-ivory/80 px-5 text-sm text-forest-950 hover:bg-ivory sm:w-auto md:bg-ivory/25"
             arrow={false}
             event={analyticsEvents.heroExploreProjects}
           >

@@ -97,13 +97,13 @@ export default function FeaturedProjectsBlock({ projects }: { projects: Featured
 
         <div
           ref={scrollerRef}
-          className="mt-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 md:mt-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:gap-6 md:mt-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {projects.map((project, index) => (
             <div
               key={project.slug}
               data-project-card
-              className="w-[min(100%,340px)] shrink-0 snap-start sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+              className="w-[min(78vw,19.5rem)] shrink-0 snap-start sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
             >
               <Reveal delay={index * 0.08}>
                 <ProjectCard project={project} />

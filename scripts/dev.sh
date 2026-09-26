@@ -6,7 +6,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-# Default 3010 — host 3000 is often taken by automation-web on this VPS.
+# Default 3010 — host 3000 may be used by other stacks on this VPS.
 PORT="${PORT:-3010}"
 HOST="${HOST:-127.0.0.1}"
 URL="http://${HOST}:${PORT}"

@@ -129,10 +129,10 @@ export default function WhatPeopleSay() {
         </Reveal>
 
         <Reveal
-          className="relative flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:justify-center sm:gap-4 lg:col-span-4 lg:justify-start lg:pl-2"
+          className="relative flex flex-col items-center gap-5 lg:col-span-4 lg:flex-row lg:items-center lg:justify-start lg:gap-4 lg:pl-2"
           delay={0.1}
         >
-          <div className="relative w-[min(100%,15.5rem)] shrink-0 sm:w-[16.5rem] lg:w-[17rem]">
+          <div className="relative w-[min(100%,15.5rem)] shrink-0 lg:w-[17rem]">
             <div className="rotate-[4deg] rounded-md bg-white p-[3px] shadow-[0_22px_40px_-18px_rgba(8,53,43,0.45)]">
               <div className="relative aspect-[5/4.6] overflow-hidden rounded-[2px]">
                 <Image
@@ -148,7 +148,7 @@ export default function WhatPeopleSay() {
           </div>
 
           <p
-            className="flex shrink-0 rotate-[6deg] flex-col items-center font-hand text-[1.45rem] leading-[1.15] text-forest-950/85 sm:items-start sm:rotate-[8deg] sm:text-[1.65rem] md:text-[1.8rem]"
+            className="flex shrink-0 rotate-[6deg] flex-col items-center font-hand text-[1.45rem] leading-[1.15] text-forest-950/85 md:text-[1.65rem] lg:items-start lg:rotate-[8deg] lg:text-[1.8rem]"
             aria-hidden
           >
             <span>Real People</span>
